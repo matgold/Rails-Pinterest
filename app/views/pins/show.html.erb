@@ -8,6 +8,7 @@
       
       <div class="panel-body">
         <%= @pin.description %><br/>
+        <br/><strong>Autor: <%= @pin.user.name %></strong><br/>
         <% if @pin.user == current_user %>
           <br/><%= link_to 'Edycja', edit_pin_path(@pin) %>
         <% end %>

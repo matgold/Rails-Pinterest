@@ -5,6 +5,7 @@
         <%= link_to image_tag(pin.image.url(:thumb)), pin %><br/>
         <div class="panel-body">
           <%= pin.description %><br/>
+          <br/><strong>Autor: <%= pin.user.name if pin.user %></strong>
         </div>
         <% if pin.user == current_user %>
           <div class="panel-footer">

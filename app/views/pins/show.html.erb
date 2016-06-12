@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-offset-2 col-md-8">
+  <div class="col-md-offset-3 col-md-6">
     <div class="panel panel-default">
       
       <div class="panel-heading center">
@@ -9,15 +9,62 @@
       <div class="panel-body">
         <%= @pin.description %><br/>
         <br/><strong>Autor: <%= @pin.user.name %></strong><br/>
-        <% if @pin.user == current_user %>
-          <br/><%= link_to 'Edycja', edit_pin_path(@pin) %>
-        <% end %>
       </div>
       
       <div class="panel-footer">
-        <%= link_to 'Wstecz', pins_path %>
+        <div class="row">
+          <div class="col-md-6">
+            <%= link_to 'Wstecz', pins_path, class: "btn btn-default" %>
+          </div>
+          <div class="col-md-6">
+            <div class="btn-group pull-right">
+              <% if @pin.user == current_user %>
+                <%= link_to 'Edytuj', edit_pin_path(@pin), class: "btn btn-default" %>
+                <%= link_to 'Usuń', @pin, method: :delete, data: { confirm: 'Jesteś pewien?' }, class: "btn btn-default" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
       </div>
       
+      <div class="panel-body">
+        
+        <h4>KOMENTARZE: <%= @pin.comments.count %></h4><br/>
+        <%= render "comments/comment" %>
+        
+        <% if @comments.blank? %>
+          <h4>Nikt jeszcze nie skomentował... Może będziesz pierwszy?</h4>
+        <% else %>
+          <% @pin.comments.each do |comment| %>
+          
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <div class="row">
+                  <div class="col-md-6">
+                    <strong><%= comment.user.name %></strong>
+                  </div>
+                  <% if comment.user == current_user %>
+                    <div class="col-md-6">
+                      <div class="btn-group pull-right">
+                        <% if @pin.user == current_user %>
+                          <%= link_to 'Edytuj', edit_pin_comment_path(@pin,comment), class: "btn btn-default btn-xs" %>
+                          <%= link_to 'Usuń', pin_comment_path(@pin,comment), method: :delete, data: { confirm: 'Jesteś pewien?' }, class: "btn btn-default btn-xs" %>
+                        <% end %>
+                      </div>
+                    </div>
+                  <% end %>
+                </div>
+              </div>
+              <div class="panel-body">
+                <%= comment.description %>
+              </div>
+            </div>
+            
+          <% end %>
+        <% end %>
+        
+      </div>
     </div>
+    
   </div>
 </div>

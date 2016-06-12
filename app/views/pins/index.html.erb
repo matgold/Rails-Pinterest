@@ -7,13 +7,10 @@
           <%= pin.description %><br/>
           <br/><strong>Autor: <%= pin.user.name if pin.user %></strong>
         </div>
-        <% if pin.user == current_user %>
-          <div class="panel-footer">
-            <%= link_to 'Edytuj', edit_pin_path(pin) %><br/>
-            <%= link_to 'Usuń', pin, method: :delete, data: { confirm: 'Jesteś pewien?' } %><br/>
-          </div>
+        <div class="panel-footer">
+          <h5><%= pin.comments.count %> Komentarzy</h5>
+        </div>
       </div>
-      <% end %>
     </div>
   <% end %>
 </div>

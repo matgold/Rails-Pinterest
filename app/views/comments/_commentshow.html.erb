@@ -1,0 +1,49 @@
+<% if @comments.blank? %>
+   <h4>Nikt jeszcze nie skomentował... Może będziesz pierwszy?</h4>
+<% else %>
+   <div class="panel panel-default">
+      <div class="panel-heading">
+         <strong><%= comment.user.name %></strong>
+      </div>
+         <div class="panel-body">
+            <%= comment.description %>
+         </div>
+         <% if comment.user == current_user %>
+            <div class="panel-footer">
+               <div class="row">
+                  <div class="col-md-6">
+                     <div class="btn-group pull-left">
+                        <% if @pin.user == current_user %>
+                           <%= link_to 'Edytuj', edit_pin_comment_path(@pin,comment), class: "btn btn-default" %>
+                           <%= link_to 'Usuń', pin_comment_path(@pin,comment), method: :delete, data: { confirm: 'Jesteś pewien?' }, class: "btn btn-default" %>
+                        <% end %>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         <% end %>
+   </div>
+<% end %>
+
+
+
+
+
+<%= render :partial => 'comments/comment' %>
+
+
+      
+      
+      
+      <div class="panel-body">
+        
+        <h4>KOMENTARZE: <%= @pin.comments.count %></h4><br/>
+        <%= render "comments/form" %>
+        
+        <% if @comments.blank? %>
+          <h4>Nikt jeszcze nie skomentował... Może będziesz pierwszy?</h4>
+        <% else %>
+          <%= render @pin.comments %>
+        <% end %>
+        
+      </div>

@@ -12,6 +12,8 @@ class PinsController < ApplicationController
   # GET /pins/1
   # GET /pins/1.json
   def show
+    
+    @comments = Comment.where(pin_id: @pin.id).order("created_at DESC")
   end
 
   # GET /pins/new

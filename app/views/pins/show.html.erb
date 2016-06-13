@@ -7,8 +7,15 @@
       </div>
       
       <div class="panel-body">
+        
         <%= @pin.description %><br/>
-        <br/><strong>Autor: <%= @pin.user.name %></strong><br/>
+        <br/><strong>Autor: <%= @pin.user.name %></strong><br/><br/>
+        <div>Tagi: 
+          <% @pin.tags.each do |tag| %>
+            <%= link_to tag.name, tag_path(tag) %>, 
+          <% end %>
+        </div>
+        
       </div>
       
       <div class="panel-footer">
@@ -30,7 +37,6 @@
       <div class="panel-body">
         
         <h4>KOMENTARZE: <%= @pin.comments.count %></h4><br/>
-        <%= render "comments/comment" %>
         
         <% if @comments.blank? %>
           <h4>Nikt jeszcze nie skomentował... Może będziesz pierwszy?</h4>
@@ -46,10 +52,8 @@
                   <% if comment.user == current_user %>
                     <div class="col-md-6">
                       <div class="btn-group pull-right">
-                        <% if @pin.user == current_user %>
-                          <%= link_to 'Edytuj', edit_pin_comment_path(@pin,comment), class: "btn btn-default btn-xs" %>
-                          <%= link_to 'Usuń', pin_comment_path(@pin,comment), method: :delete, data: { confirm: 'Jesteś pewien?' }, class: "btn btn-default btn-xs" %>
-                        <% end %>
+                        <%= link_to 'Edytuj', edit_pin_comment_path(@pin,comment), class: "btn btn-default btn-xs" %>
+                        <%= link_to 'Usuń', pin_comment_path(@pin,comment), method: :delete, data: { confirm: 'Jesteś pewien?' }, class: "btn btn-default btn-xs" %>
                       </div>
                     </div>
                   <% end %>
@@ -62,6 +66,8 @@
             
           <% end %>
         <% end %>
+        
+        <%= render "comments/comment" %>
         
       </div>
     </div>

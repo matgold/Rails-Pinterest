@@ -1,3 +1,31 @@
+
+
+
+
+<div id="pins" class="transitions-enabled">
+  <% @tag.pins.each do |pin| %>
+    <div class="box">
+      <div class="panel panel-default">
+        <%= link_to image_tag(pin.image.url(:thumb)), pin %><br/>
+        <div class="panel-body">
+          <%= pin.description %><br/>
+          <br/><strong>Autor: <%= pin.user.name if pin.user %></strong>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+
+
+
+
+
+
+
+
+
+
 <% if @comments.blank? %>
    <h4>Nikt jeszcze nie skomentował... Może będziesz pierwszy?</h4>
 <% else %>

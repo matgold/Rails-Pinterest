@@ -1,0 +1,26 @@
+<div class="row">
+<div class="col-md-offset-3 col-md-6">
+
+<div class="panel panel-default">
+   <div class="panel-heading">
+     <h2>Lista tagów</h2>
+   </div>
+  
+   <div class="panel-body">
+      <% @tag.each do |tag| %>
+         <%= link_to tag.name, tag_path(tag) %>, 
+      <% end %>
+   </div>
+   
+   <div class="panel-footer">
+      <div class="row">
+         <div class="col-md-6">
+            <%= link_to 'Wstecz', pins_path, class: "btn btn-default" %>
+         </div>
+      </div>
+   </div>
+  
+</div>
+
+</div>
+</div>

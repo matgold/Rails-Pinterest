@@ -1,0 +1,30 @@
+<div class="panel panel-default">
+   <div class="panel-heading">
+     <h2>Piny oznaczone tagiem: <%= @tag.name %></h2>
+   </div>
+  
+   <div class="panel-body">
+      <div id="tags" class="transitions-enabled">
+        <% @tag.pins.each do |pin| %>
+              <div class="box2">
+                  <div class="panel panel-default">
+                    <%= link_to image_tag(pin.image.url(:thumb)), pin %><br/>
+                     <div class="panel-body">
+                        <%= pin.description %><br/>
+                        <br/><strong>Autor: <%= pin.user.name if pin.user %></strong>
+                    </div>
+                  </div>
+               </div>
+        <% end %>
+      </div>
+   </div>
+   
+   <div class="panel-footer">
+      <div class="row">
+         <div class="col-md-6">
+            <%= link_to 'Wstecz', :back, class: "btn btn-default" %>
+         </div>
+      </div>
+   </div>
+  
+</div>

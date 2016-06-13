@@ -12,7 +12,6 @@ class PinsController < ApplicationController
   # GET /pins/1
   # GET /pins/1.json
   def show
-    
     @comments = Comment.where(pin_id: @pin.id).order("created_at DESC")
   end
 
@@ -73,7 +72,7 @@ class PinsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def pin_params
-      params.require(:pin).permit(:description, :image, :name)
+      params.require(:pin).permit(:description, :image, :name, :tag_list)
     end
     
     def correct_user

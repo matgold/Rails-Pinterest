@@ -25,6 +25,9 @@
           </div>
           <div class="col-md-6">
             <div class="btn-group pull-right">
+              <%= link_to like_pin_path(@pin), method: :put,  class: "btn btn-default" do %>
+                <span class="glyphicon glyphicon-heart"></span> <strong><%= @pin.get_upvotes.size %></strong>
+              <% end %>
               <% if @pin.user == current_user %>
                 <%= link_to 'Edytuj', edit_pin_path(@pin), class: "btn btn-default" %>
                 <%= link_to 'Usuń', @pin, method: :delete, data: { confirm: 'Jesteś pewien?' }, class: "btn btn-default" %>
